@@ -16,3 +16,5 @@ CREATE TABLE compte (
     id_utilisateur int,
     CONSTRAINT FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id)
 );
+
+INSERT INTO utilisateur(nom, prenom, email, genre, mdp_actuel) VALUES('ricq', 'yohann', 'yohann.ricq@email.com', 'H', 'formation');
