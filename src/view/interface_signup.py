@@ -4,6 +4,7 @@ from src.controller.utilisateur_controller import UtilisateurController
 from src.models.compte import Compte
 from src.customcrypt import CustomCrypt
 from src.models.utilisateur import Utilisateur
+from src.conversion_functions import tuple_to_str, str_to_tuple
 
 
 class InterfaceSignUp(Tk):
@@ -18,7 +19,7 @@ class InterfaceSignUp(Tk):
         # Si l'email existe déjà
         if self.__utilisateur_controller.find_by_email(email) is not None:
             messagebox.showinfo(
-                'Erreur inscription', 'Cette email existe déjà', icon=messagebox.ERROR)
+                'Erreur', 'Cette email existe déjà', icon=messagebox.ERROR)
         else:
             customcrypt = CustomCrypt(mdp)
             customcrypt.crypt()
@@ -29,15 +30,17 @@ class InterfaceSignUp(Tk):
             print('Ajout utilisateur')
             
             id_utilisateur = self.__utilisateur_controller.get_last_id()
-            print(f'Dernier id utilisateur : {id_utilisateur}')
+            # print(f'Dernier id utilisateur : {id_utilisateur}')
             
-            cle = ''.join(map(str, customcrypt.cle))
+            cle = tuple_to_str(customcrypt.cle)
+            print(f'tuple_to_str : {cle}')
+            
             compte = Compte(cle, customcrypt.sel, 'new', id_utilisateur)
             self.__compte_controller.save(compte)
             
             print('Ajout compte')
             
-            messagebox.showinfo('Message', 'Inscription tables utilisateur et compte', icon=messagebox.INFO)
+            messagebox.showinfo('Succes', 'Inscription réussie', icon=messagebox.INFO)
 
     def __init__(self, utilisateur_controller: UtilisateurController, compte_controller: CompteController) -> None:
         super().__init__()

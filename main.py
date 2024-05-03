@@ -3,13 +3,7 @@ from src.controller.utilisateur_controller import UtilisateurController
 from src.dao.compte_dao import CompteDao
 from src.dao.utilisateur_dao import UtilisateurDao
 from src.config.my_connection import MyConnection
-# from src.customcrypt import CustomCrypt
 from src.view.interface_signup import InterfaceSignUp
-
-# mdp = "formation"
-# customCrypt = CustomCrypt(mdp)
-# customCrypt.crypt()
-# print(f'Mdp chiffré : {customCrypt.mdp_chiffre}')
 
 myconnection = MyConnection()
 if (myconnection.connection.is_connected):

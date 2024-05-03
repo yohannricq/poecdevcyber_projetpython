@@ -6,13 +6,13 @@ class CustomCrypt:
 
     __mdp_chiffre: str
     __sel : str
-    __cle : str
+    __cle : tuple[int]
 
     def __init__(self, mdp: str) -> None:
         self.__mdp = mdp
         self.__mdp_chiffre = ""
         self.__sel = ""
-        self.__cle = ""
+        self.__cle = ()
 
     @property
     def mdp(self):
@@ -52,6 +52,7 @@ class CustomCrypt:
         liste = []
         for i in range(len(self.__mdp)):
             liste.append(random.randint(0, 10))
+            # self.__cle[i] = random.randint(0, 10)
 
         self.__cle = tuple(liste)
         print(f'Clé : {self.__cle}')
