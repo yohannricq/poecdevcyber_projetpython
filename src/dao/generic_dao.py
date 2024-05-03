@@ -9,7 +9,7 @@ class GenericDao(Generic[T], ABC):
     @abstractmethod
     def save(self, t: T) -> T:
         pass
-
+    
     @abstractmethod
-    def find_by_email(self, email) -> Optional[T]:
+    def find_by_id(self, id) -> Optional[T]:
         pass

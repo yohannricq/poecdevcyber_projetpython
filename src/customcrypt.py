@@ -5,10 +5,14 @@ import string
 class CustomCrypt:
 
     __mdp_chiffre: str
+    __sel : str
+    __cle : str
 
     def __init__(self, mdp: str) -> None:
         self.__mdp = mdp
         self.__mdp_chiffre = ""
+        self.__sel = ""
+        self.__cle = ""
 
     @property
     def mdp(self):
@@ -22,13 +26,22 @@ class CustomCrypt:
     def mdp_chiffre(self):
         return self.__mdp_chiffre
 
+    @property
+    def sel(self):
+        return self.__sel
+
+    @property
+    def cle(self):
+        return self.__cle
+
+
     def __saler_mdp(self) -> None:
         """Sale le mot de passe
         """
         letters = string.ascii_lowercase
-        sel = ''.join(random.choice(letters) for i in range(len(self.__mdp)))
-        print(f'Sel : {sel}')
-        self.__mdp += sel
+        self.__sel = ''.join(random.choice(letters) for i in range(len(self.__mdp)))
+        print(f'Sel : {self.__sel}')
+        self.__mdp += self.__sel
 
     def __generer_cle(self) -> tuple:
         """Génère une clé à partir du mot de passe
@@ -40,9 +53,9 @@ class CustomCrypt:
         for i in range(len(self.__mdp)):
             liste.append(random.randint(0, 10))
 
-        cle = tuple(liste)
-        print(f'Clé : {cle}')
-        return cle
+        self.__cle = tuple(liste)
+        print(f'Clé : {self.__cle}')
+        return self.__cle
 
     def crypt(self) -> None:
         """Chiffre le mot de passe

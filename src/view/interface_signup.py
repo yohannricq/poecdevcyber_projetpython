@@ -1,10 +1,12 @@
 from tkinter import Button, Entry, Label, Tk, messagebox
+from src.controller.compte_controller import CompteController
+from src.controller.utilisateur_controller import UtilisateurController
+from src.models.compte import Compte
 from src.customcrypt import CustomCrypt
 from src.models.utilisateur import Utilisateur
-from src.dao.utilisateur_dao import UtilisateurDao
 
 
-class FormSignUp(Tk):
+class InterfaceSignUp(Tk):
 
     def __signup(self) -> None:
 
@@ -14,27 +16,34 @@ class FormSignUp(Tk):
         mdp = self.__entry_mdp.get()
 
         # Si l'email existe déjà
-        if self.__utilisateurDao.find_by_email(email) is not None:
+        if self.__utilisateur_controller.find_by_email(email) is not None:
             messagebox.showinfo(
                 'Erreur inscription', 'Cette email existe déjà', icon=messagebox.ERROR)
         else:
             customcrypt = CustomCrypt(mdp)
             customcrypt.crypt()
-            mdp = customcrypt.mdp_chiffre
 
-            utilisateur = Utilisateur(nom, prenom, email, mdp)
-            self.__utilisateurDao.save(utilisateur)
-            messagebox.showinfo('Succes', 'Nouvel utilisateur inscrit', icon=messagebox.INFO)
+            utilisateur = Utilisateur(nom, prenom, email, customcrypt.mdp_chiffre)
+            self.__utilisateur_controller.save(utilisateur)
+            
+            print('Ajout utilisateur')
+            
+            id_utilisateur = self.__utilisateur_controller.get_last_id()
+            print(f'Dernier id utilisateur : {id_utilisateur}')
+            
+            cle = ''.join(map(str, customcrypt.cle))
+            compte = Compte(cle, customcrypt.sel, 'new', id_utilisateur)
+            self.__compte_controller.save(compte)
+            
+            print('Ajout compte')
+            
+            messagebox.showinfo('Message', 'Inscription tables utilisateur et compte', icon=messagebox.INFO)
 
-            # if (res is not None):
-            #     messagebox.showinfo('Message', 'Nouvel utilisateur inscrit', icon=messagebox.INFO)
-            # else:
-            #     messagebox.showinfo('Message', 'Erreur inscription utilisateur', icon=messagebox.ERROR)
-
-    def __init__(self, utilisateurDao: UtilisateurDao) -> None:
+    def __init__(self, utilisateur_controller: UtilisateurController, compte_controller: CompteController) -> None:
         super().__init__()
 
-        self.__utilisateurDao = utilisateurDao
+        self.__utilisateur_controller = utilisateur_controller
+        self.__compte_controller = compte_controller
 
         self.width = 500
         self.height = 500

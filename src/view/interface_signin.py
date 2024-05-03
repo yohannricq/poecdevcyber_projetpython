@@ -2,7 +2,7 @@ from tkinter import Button, Entry, Label, Tk, messagebox
 from src.dao.utilisateur_dao import UtilisateurDao
 
 
-class FormSignIn(Tk):
+class InterfaceSignIn(Tk):
 
     def __signin(self) -> None:
         email = self.__entry_username.get()

@@ -1,7 +1,10 @@
+from src.controller.compte_controller import CompteController
+from src.controller.utilisateur_controller import UtilisateurController
+from src.dao.compte_dao import CompteDao
 from src.dao.utilisateur_dao import UtilisateurDao
 from src.config.my_connection import MyConnection
-from src.customcrypt import CustomCrypt
-from src.view.form_signup import FormSignUp
+# from src.customcrypt import CustomCrypt
+from src.view.interface_signup import InterfaceSignUp
 
 # mdp = "formation"
 # customCrypt = CustomCrypt(mdp)
@@ -13,10 +16,12 @@ if (myconnection.connection.is_connected):
     print("Connexion BDD OK")
 
     utilisateurDao = UtilisateurDao(myconnection)
+    utilisateurController = UtilisateurController(utilisateurDao)
+    
+    compteDao = CompteDao(myconnection)
+    compteController = CompteController(compteDao)
 
-    # form_create_account = FormSignIn(utilisateurDao)
-    # form_create_account.mainloop()
-    form_signup = FormSignUp(utilisateurDao)
+    form_signup = InterfaceSignUp(utilisateurController, compteController)
     form_signup.mainloop()
 
     myconnection.close()
