@@ -16,17 +16,9 @@ class MyConnection:
     def connection(self):
         return self.__connection
 
-    @connection.setter
-    def connection(self, value):
-        self.__connection = value
-
     @property
     def cursor(self):
         return self.__cursor
-
-    @cursor.setter
-    def cursor(self, value):
-        self.__cursor = value
 
     def query(self, sql_request, params):
         self.__cursor.execute(sql_request, params)

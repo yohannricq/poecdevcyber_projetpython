@@ -9,12 +9,12 @@ class UtilisateurController:
         self.__utilisateurDao = utilisateurDao
 
     def save(self, utilisateur: Utilisateur) -> Utilisateur:
-        self.__utilisateurDao.save(utilisateur)
+        return self.__utilisateurDao.save(utilisateur)
         
     def find_by_email(self, email) -> Optional[Utilisateur]:
         return self.__utilisateurDao.find_by_email(email)
     
-    def find_by_id(self, id) -> Utilisateur | None:
+    def find_by_id(self, id) -> Optional[Utilisateur]:
         return self.__utilisateurDao.find_by_id(id)
     
     def get_last_id(self) -> int:

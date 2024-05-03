@@ -10,30 +10,14 @@ class Utilisateur:
     def nom(self):
         return self.__nom
 
-    # @nom.setter
-    # def nom(self, value):
-    #     self.__nom = value
-
     @property
     def prenom(self):
         return self.__prenom
-
-    # @prenom.setter
-    # def prenom(self, value):
-    #     self.__prenom = value
 
     @property
     def email(self):
         return self.__email
 
-    # @email.setter
-    # def email(self, value):
-    #     self.__email = value
-
     @property
     def mdp_actuel(self):
         return self.__mdp_actuel
-
-    # @mdp_actuel.setter
-    # def mdp_actuel(self, value):
-    #     self.__mdp_actuel = value
