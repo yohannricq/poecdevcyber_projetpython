@@ -1,30 +1,39 @@
 class Utilisateur:
 
-    def __init__(self, nom: str, prenom: str, email: str) -> None:
+    def __init__(self, nom: str, prenom: str, email: str, mdp_actuel: str) -> None:
         self.__nom = nom
         self.__prenom = prenom
         self.__email = email
+        self.__mdp_actuel = mdp_actuel
 
     @property
-    def _nom(self):
+    def nom(self):
         return self.__nom
 
-    @_nom.setter
+    @nom.setter
     def _nom(self, value):
         self.__nom = value
 
     @property
-    def _prenom(self):
+    def prenom(self):
         return self.__prenom
 
-    @_prenom.setter
-    def _prenom(self, value):
+    @prenom.setter
+    def prenom(self, value):
         self.__prenom = value
 
     @property
-    def _email(self):
+    def email(self):
         return self.__email
 
-    @_email.setter
-    def _email(self, value):
+    @email.setter
+    def email(self, value):
         self.__email = value
+
+    @property
+    def mdp_actuel(self):
+        return self.__mdp_actuel
+
+    @mdp_actuel.setter
+    def _mdp_actuel(self, value):
+        self.__mdp_actuel = value

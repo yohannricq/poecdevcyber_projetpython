@@ -44,11 +44,8 @@ class CustomCrypt:
         print(f'Clé : {cle}')
         return cle
 
-    def crypt(self) -> str:
+    def crypt(self) -> None:
         """Chiffre le mot de passe
-
-        Returns:
-            str: Le mot de passe chiffré
         """
         self.__saler_mdp()
         print(f'Mdp après salage : {self.__mdp}')
